@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Build Docker images
+                    sh 'docker build -t backend-image ./backend'
+                    sh 'docker build -t frontend-image ./frontend'
+                    sh 'docker build -t database-image ./database'
+                }
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    // Push Docker images to Hub
+                    sh 'docker push backend-image'
+                    sh 'docker push frontend-image'
+                    sh 'docker push database-image'
+                }
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Deploy to Kubernetes
+                    sh 'kubectl apply -f kubernetes/backend-deployment.yaml'
+                    sh 'kubectl apply -f kubernetes/frontend-deployment.yaml'
+                    sh 'kubectl apply -f kubernetes/database-deployment.yaml'
+                }
+            }
+        }
+    }
+}
