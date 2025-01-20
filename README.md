@@ -63,7 +63,7 @@ The Jenkins pipeline automates the build, push, and deploy processes using a `Je
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/LabourHiringSystem.git
+git clone https://github.com/Ronu010/LabourHiringSystem.git
 cd LabourHiringSystem
 
 
